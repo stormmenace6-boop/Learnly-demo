@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Course Detail — Learnly</title>
+<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+<header class="container">
+<nav>
+<ul><li><strong>Learnly</strong></li></ul>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="#">Courses</a></li>
+<li><a href="#">Login</a></li>
+</ul>
+</nav>
+</header>
+
+<main class="container" id="course-detail">
+<h2>Loading course...</h2>
+</main>
+
+<footer class="container">
+<small>© 2025 Learnly. All rights reserved.</small>
+</footer>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const courseId = urlParams.get('id');
+
+fetch('courses.json')
+.then(response => response.json())
+.then(courses => {
+const course = courses.find(c => c.id == courseId);
+const detailContainer = document.getElementById('course-detail');
+if (course) {
+detailContainer.innerHTML = 
+<h2></h2>
+<img src="" alt="">
+<p><strong>Instructor:</strong> Jane Doe</p>
+<p></p>
+<h3>Preview Lesson</h3>
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/aqz-KE-bpKQ" frameborder="0" allowfullscreen></iframe>
+<h3>Course Curriculum</h3>
+<ul>
+<li>Lesson 1: Introduction</li>
+<li>Lesson 2: Key Skills</li>
+<li>Lesson 3: Practice Session</li>
+<li>Lesson 4: Final Project</li>
+</ul>
+<a href="#" role="button" class="contrast">Enroll Now — €19</a>
+;
+} else {
+detailContainer.innerHTML = <p>Course not found.</p>;
+}
+})
+.catch(err => console.error('Error loading course:', err));
+</script>
+</body>
+</html>
